@@ -34,5 +34,6 @@ curl --header "Content-Type: application/json" \
  http://localhost:5227/api/Customer | jq
 ```
 
-
-References: https://balta.io/blog/aspnet-core-cqrs-mediator
+References: 
+- https://balta.io/blog/aspnet-core-cqrs-mediator
+- https://stackoverflow.com/questions/75527541/could-not-load-type-mediatr-servicefactory

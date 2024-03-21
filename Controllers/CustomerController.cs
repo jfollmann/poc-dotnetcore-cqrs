@@ -1,6 +1,6 @@
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using POCDotNet.Domain.Commands.Requests;
-using POCDotNet.Domain.Handlers;
 using POCDotNet.Domain.Queries.Requests;
 
 namespace POCDotNet.Controllers
@@ -12,22 +12,22 @@ namespace POCDotNet.Controllers
     [HttpGet]
     [Route("")]
     public IActionResult GetById(
-      [FromServices] IFindCustomerByIdHandler handler,
+      [FromServices] IMediator mediator,
       [FromQuery] FindCustomerByIdRequest command)
     {
-      var result = handler.Handle(command);
-      if (result is null) return NotFound();
-      return Ok(result);
+      var target = mediator.Send(command);
+      if (target is null) return NotFound();
+      return Ok(target.Result);
     }
 
     [HttpPost]
     [Route("")]
     public IActionResult Create(
-      [FromServices] ICreateCustomerHandler handler,
+      [FromServices] IMediator mediator,
       [FromBody] CreateCustomerRequest command)
     {
-      var response = handler.Handle(command);
-      return Ok(response);
+      var target = mediator.Send(command);
+      return Ok(target.Result);
     }
   }
 }
