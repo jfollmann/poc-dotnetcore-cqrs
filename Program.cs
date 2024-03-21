@@ -1,4 +1,5 @@
-using POCDotNet.Domain.Handlers;
+using System.Reflection;
+using MediatR;
 using POCDotNet.Domain.Repositories;
 using POCDotNet.Infra.Repositories;
 
@@ -7,8 +8,9 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddTransient<ICreateCustomerHandler, CreateCustomerHandler>();
-builder.Services.AddTransient<IFindCustomerByIdHandler, FindCustomerByIdHandler>();
+builder.Services.AddMediatR(cfg =>
+  cfg.RegisterServicesFromAssemblies(Assembly.GetExecutingAssembly())
+);
 builder.Services.AddSingleton<ICustomerRepository, CustomerMemoryRepository>();
 
 var app = builder.Build();

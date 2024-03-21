@@ -5,6 +5,18 @@ Create new webapi with controllers:
 dotnet new webapi --use-controllers --framework net8.0 -n poc-dotnet-cqrs
 ```
 
+## Types of Lifetime (Dependency Injection)
+| Type      | Same Request     | Other Request        |
+|-----------|------------------|----------------------|
+| Singleton | Same instance    | Same instance        |
+| Scoped    | Same instance    | New instance         |
+| Transient | New instance     | New instance         |
+
+Restore packages
+```sh
+dotnet restore
+```
+
 Clean project
 ```sh
 dotnet clean
@@ -34,5 +46,7 @@ curl --header "Content-Type: application/json" \
  http://localhost:5227/api/Customer | jq
 ```
 
-
-References: https://balta.io/blog/aspnet-core-cqrs-mediator
+References: 
+- https://balta.io/blog/aspnet-core-cqrs-mediator
+- https://stackoverflow.com/questions/75527541/could-not-load-type-mediatr-servicefactory
+- https://pt.stackoverflow.com/a/528207
